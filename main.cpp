@@ -10,12 +10,13 @@ struct TwoDVec{
 };
 
 struct ThreeDVec{
+    int x0;
+    int y0;
+    int z0;
     int x;
     int y;
     int z;
 };
-
-
 
 void VecOut(vector<TwoDVec> v){
     for(int i = 0; i < v.size(); ++i ){
@@ -24,7 +25,7 @@ void VecOut(vector<TwoDVec> v){
 }
 
 //--------------------------MergeSort----------------------------------------------------
-
+/*
 vector<TwoDVec> Merge(vector<TwoDVec> v1, vector<TwoDVec> v2)
 {
     unsigned long len = v1.size() + v2.size();
@@ -128,7 +129,7 @@ vector<TwoDVec> MergeSort(vector<TwoDVec> v) //Main sorting function
 
     return vRes;
 }
-
+*/
 //-------------------------End of MergeSort-----------------------------------------------
 
 vector<int> operator+(vector<int> vec1, vector<int> vec2){      //summ of vectors
@@ -153,6 +154,20 @@ unsigned long operator*(vector<int> vec1, vector<int> vec2){        //scalar mul
         res += vec1[i] * vec2[i];
     }
     return res;
+}
+
+bool operator<(TwoDVec vec1, TwoDVec vec2){        //overload operator '<' for function sort
+    if(vec1.x == vec2.x){
+        if(vec1.y == vec2.y){
+            return false;                   //don't do any changes
+        }
+        else{
+            return vec1.y < vec2.y;         //sort will change vec1 and vec2
+        }
+    }
+    else{
+        return vec1.x < vec2.x;             //sort will change vec1 and vec2
+    }
 }
 
 vector<int> Cinv(unsigned long x){      //cin overload
@@ -200,14 +215,13 @@ int main() {
     cout << endl;
     cout << "Vector summ: ";
     Couterv(v1+v2);
-    cout << endl;
     cout << "Scalar multiply of vectors: "<< v1*v2 << endl;
+    cout << endl;
     
     //TASK №3
     unsigned long z;
     cout << "Enter count of vectors: ";
     cin >> z;
-    cout << endl;
     TwoDVec vc;
     vector<TwoDVec> vect(z);
     for (unsigned long i = 0; i < z; ++i){
@@ -218,9 +232,10 @@ int main() {
     VecOut(vect);
     
     //TASK №4
-    vector<TwoDVec> vect_sorted = MergeSort(vect);
+    //vector<TwoDVec> vect_sorted = MergeSort(vect);
+    sort(vect.begin(), vect.end());
     cout << "\nSorted list of vectors:" << endl;
-    VecOut(vect_sorted);
+    VecOut(vect);
     
     return 0;
 }
