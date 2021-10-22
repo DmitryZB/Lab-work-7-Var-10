@@ -119,8 +119,7 @@ vector<TwoDVec> MergeSort(vector<TwoDVec> v) //Main sorting function
     }
     
     else if(v1.size() > 2 && v2.size() <= 2){
-        vector<TwoDVec> v3 = MergeSort(v1);
-        vRes = Merge(v2, v3);
+        vRes = Merge(SwapSort(v2), MergeSort(v1));
     }
    
     else{
@@ -182,11 +181,12 @@ vector<int> Cinv(unsigned long x){      //cin overload
 }
 
 void Couterv(vector<int> v){        //cout overload
-    cout << '{' << ' ';
-    for (int i = 0; i<v.size(); ++i){
+    cout << '{';
+    for (int i = 0; i<v.size()-1; ++i){
         cout << v[i] << "; ";
     }
-    cout << '}' << endl;
+    
+    cout << v[v.size()-1] << '}' << endl;
 }
 
 
